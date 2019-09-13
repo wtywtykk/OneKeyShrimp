@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.js"></script>
+    <style>
+      html,body {
+        margin: 0;
+        padding: 0;
+		width: 540;
+		height: 570;
+      }
+      body {
+        display: block;
+      }
+	  .efftxt {
+	    font-family: PingFangSC-Regular, Verdana, Arial, 微软雅黑, 宋体;
+        font-size: 48px;
+		font-weight: bold;
+	  }
+    </style>
+  </head>
+  <body>
+    <div hidden id="preloadres"></div>
+	
+    <div style="text-align:center;left:20px;top:0px;width:530px;position:absolute;">请佩戴耳机！！！请佩戴耳机！！！请佩戴耳机！！！</div>
+    <div style="text-align:center;left:20px;top:550px;width:530px;position:absolute;">请佩戴耳机！！！请佩戴耳机！！！请佩戴耳机！！！</div>
+    <img id="bg" src="bg.jpg" style="left:20px;top:20px;width:500px;height:530px;position:absolute;"></img>
+    <div id="txt" class="efftxt" style="text-align:center;left:20px;top:20px;width:300px;height:50px;position:absolute;"></div>
+	<script type="text/javascript">
+	  var EffLst=["a0","a1","a2","a3","ge0","ge1","ge2","ge3","ge4","meng","dian"];
+	  var TxtLst=["啊","啊","啊","啊","嗝","嗝","嗝","嗝","嗝","梦总好烦","我没电了"];
+      $(document).ready(function(){
+	    for(var i = 0,len = EffLst.length; i < len; i++){
+		  var newelement=document.createElement("audio");
+		  newelement.id="aud_"+EffLst[i];
+		  newelement.src=EffLst[i]+".mp3";
+		  newelement.preload="auto";
+          $("#preloadres").append(newelement);
+        }
+
+        $("#bg").click(function(){
+		  var pic=$("#bg");
+		  var txt=$("#txt");
+          pic.animate({
+            top:'+=10px',
+          },"fast");
+          pic.animate({
+            top:'-=10px',
+          },"fast");
+		  var i=Math.floor(Math.random()*EffLst.length);
+		  $("#aud_"+EffLst[i])[0].play();
+		  txt.text(TxtLst[i]+"~~");
+		  txt.css({ top: "50px" });
+		  txt.css({ opacity: 1 });
+          txt.animate({
+            top:'0px',
+            opacity:'0',
+          },"slow");
+        });
+      });
+    </script>
+  </body>
+</html>
